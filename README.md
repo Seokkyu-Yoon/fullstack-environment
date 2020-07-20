@@ -1,5 +1,5 @@
-# Deadeok-ReShare-Platform
-### Deadeok resources-sharing platform
+# webpack-express-hmr-fullstack
+### Hot module reload to with gulp
 
 # development environment
 1. express

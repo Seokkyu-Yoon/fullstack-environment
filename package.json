@@ -1,5 +1,5 @@
 {
-  "name": "deadeok-reshare-platform",
+  "name": "webpack-express-hmr-fullstack",
   "version": "0.0.1",
   "private": true,
   "main": "bin/server.js",
@@ -48,13 +48,10 @@
     "type": "git",
     "url": "git@192.168.1.226:Seokkyu-Yoon/deadeok-reshare-platform.git"
   },
-  "keywords": [
-    "platform"
-  ],
+  "keywords": [],
   "license": "ISC",
-  "contributors": [
-    "Yeonheon Gu <kusubang@modutech.co.kr>",
-    "Seokkyu Yoon <yskyu93@modutech.co.kr>",
-    "Sangwon Lee <onedeal@modutech.co.kr>"
-  ]
+  "author": {
+    "name": "Seokkyu Yoon",
+    "email": "yskyu93@gmail.com"
+  }
 }
