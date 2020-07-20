@@ -1,85 +1,46 @@
+const fs = require('fs');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-const workspace = path.resolve();
-const pathPublic = path.join(workspace, 'public');
-const pathBuild = path.join(workspace, 'build');
+const workspace = __dirname;
+const pathSrc = path.join(workspace, 'src');
+const pathJs = path.join(pathSrc, 'js');
 
-const pathJs = path.join(pathPublic, 'js');
-const pathView = path.join(pathPublic, 'view');
+const listJs = fs.readdirSync(path.join(pathJs), { encoding: 'utf-8' });
+const entry = listJs.reduce((bucket, filename) => {
+  const objname = filename.slice(0, filename.lastIndexOf('.'));
+  // eslint-disable-next-line no-param-reassign
+  bucket[objname] = ['@babel/polyfill', path.join(pathJs, filename)];
+  return bucket;
+}, {});
 
 module.exports = {
-  mode: 'none',
-  entry: {
-    index: ['@babel/polyfill', path.join(pathJs, 'index.js')],
-  },
+  entry,
   output: {
     filename: '[name].js',
-    path: pathBuild,
+    path: path.join(workspace, 'public'),
+    publicPath: '/',
   },
   module: {
-    rules: [
+    loaders: [
       {
         test: /\.js$/,
+        loader: 'babel-loader',
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
+        query: {
+          cacheDirectory: true,
+          presets: ['@babel/preset-env'],
         },
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-        ],
-      },
-      {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'fonts/',
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(png|jpg|gif|ico)$/,
-        loader: 'file-loader',
       },
     ],
   },
-  plugins: [
-    new CopyWebpackPlugin([
-      { from: 'public/image', to: 'image' },
-    ]),
-    new HtmlWebpackPlugin({
-      filename: 'index.ejs',
-      template: path.join(pathView, 'index.ejs'),
-      templateParameters: {
-        title: '<%= title %>',
-      },
-      chunks: ['index'],
-      favicon: path.join(pathPublic, 'favicon.ico'),
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'error.ejs',
-      template: path.join(pathView, 'error.ejs'),
-      templateParameters: {
-        message: '<%= message %>',
-        error: {
-          status: '<%= error.status %>',
-          stack: '<%= error.stack %>',
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          compress: true,
         },
-      },
-      chunks: [],
-      favicon: path.join(pathPublic, 'favicon.ico'),
-    }),
-  ],
+      }),
+    ],
+  },
 };

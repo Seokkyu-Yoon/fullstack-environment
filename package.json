@@ -1,42 +1,60 @@
 {
-  "name": "webpack-express-hmr-fullstack",
-  "version": "0.0.0",
+  "name": "deadeok-reshare-platform",
+  "version": "0.0.1",
   "private": true,
+  "main": "bin/server.js",
   "scripts": {
-    "start": "node ./bin/www",
-    "build": "webpack --config=webpack.config.prod.js",
-    "dev-front": "webpack-dev-server --config=webpack.config.dev.js",
-    "dev-back": "PORT=8081 nodemon ./bin/www --watch"
-  },
-  "nodemonConfig": {
-    "ignore": ["public/*", "build/*"]
+    "start": "node -r dotenv/config ./bin/server.js dotenv_config_path=/envs/prod.env",
+    "dev": "gulp"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
+    "express-favicon": "^2.0.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.7",
-    "@babel/polyfill": "^7.8.7",
-    "@babel/preset-env": "^7.8.7",
-    "babel-loader": "^8.0.6",
-    "clean-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^5.1.1",
-    "css-loader": "^3.4.2",
-    "ejs-loader": "^0.3.5",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.20.1",
-    "file-loader": "^5.1.0",
-    "html-webpack-plugin": "^3.2.0",
-    "nodemon": "^2.0.3",
-    "style-loader": "^1.1.3",
-    "webpack": "^4.41.6",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
-  }
+    "@babel/core": "^7.10.5",
+    "@babel/polyfill": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/register": "^7.10.5",
+    "babel-loader": "^8.1.0",
+    "browser-sync": "^2.26.10",
+    "del": "^5.1.0",
+    "eslint": "^7.5.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-bower": "0.0.15",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-nodemon": "^2.5.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-util": "^3.0.8",
+    "gulp-webpack": "^1.5.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.43.0"
+  },
+  "description": "# development environment 1. express 2. webpack 3. gulp",
+  "bin": {
+    "deadeok-reshare-platform": "server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@192.168.1.226:Seokkyu-Yoon/deadeok-reshare-platform.git"
+  },
+  "keywords": [
+    "platform"
+  ],
+  "license": "ISC",
+  "contributors": [
+    "Yeonheon Gu <kusubang@modutech.co.kr>",
+    "Seokkyu Yoon <yskyu93@modutech.co.kr>",
+    "Sangwon Lee <onedeal@modutech.co.kr>"
+  ]
 }

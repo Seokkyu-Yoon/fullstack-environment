@@ -1,32 +1,40 @@
-# Initializer of full stack project structure
-development environment
-1. Nodejs
-2. express - for frontend and backend
-3. webpack - for frontend
-4. nodemon - for backend
+# Deadeok-ReShare-Platform
+### Deadeok resources-sharing platform
+
+# development environment
+1. express
+2. webpack
+3. gulp
+
+# Directory structure
+```
+┬ bin ─ server.js // server runner
+├ public // compliled files
+├ routes // routing modules
+├ src // original files
+├ views // view files ( extension: ejs )
+└ app.js // express server
+```
 
 # How to start project
 ```
-// install dependency modules
+// install modules
 $ npm install
 
-// build frontend webpack modules
-$ npm run build
+// run development mode
+$ npm run dev
 
-// start full-stack server
+// run product mode
 $ npm start
+
+// run with pm2
+$ npm install -g pm2
+$ pm2 start pm2.config.js
 ```
 
-# Command description
-|command|description|memo|
-|----|----|----|
-|npm run build|build frontend modules||
-|npm start|run full stack server|port: 3000|
-|npm run dev-front|frontend dev-server|port: 8080|
-|npm run dev-back|backend dev-server|port: 8081|
-
----
-```
-2020-04-22
-@copyright Seokkyu Yoon
-```
+# env settings
+|  filename  | product use | development use |
+|------------|-------------|-----------------|
+| public.env |      √      |        √        |
+| prod.env   |      √      |                 |
+| dev.env    |             |        √        |
